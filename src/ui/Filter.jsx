@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const StyledFilter = styled.div`
@@ -33,3 +35,21 @@ const FilterButton = styled.button`
     color: var(--color-brand-50);
   }
 `;
+
+const Filter = ({ filterField, options }) => {
+  const [searchParams, SetSearchParams] = useSearchParams()
+  const currenfilter = searchParams.get(filterField) || options[0]
+
+  const handleClick = (value) => {
+    searchParams.set(filterField, value)
+    SetSearchParams(searchParams)
+  }
+
+  return (
+    <StyledFilter>
+      {options.map((option) => <FilterButton key={option.value} onClick={() => handleClick(option.value)} active={option.value === currenfilter} disabled={option.value === currenfilter}> {option.label}</FilterButton>)}
+    </StyledFilter>
+  )
+}
+
+export default Filter
