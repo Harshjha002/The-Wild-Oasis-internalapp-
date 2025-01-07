@@ -8,10 +8,12 @@ import Account from './pages/Account.jsx'
 import Login from './pages/Login.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import GlobalStyleComponent from './styles/GlobalStyles.js'
+import Booking from "./pages/Booking.jsx"
 import AppLayout from "./ui/AppLayout.jsx"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Toaster } from "react-hot-toast"
+import Checkin from "./pages/Checkin.jsx"
 
 
 const queryClient = new QueryClient({
@@ -35,6 +37,8 @@ const App = () => {
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='bookings' element={<Bookings />} />
+            <Route path='bookings/:bookingId' element={<Booking />} />
+            <Route path='checkin/:bookingId' element={<Checkin />} />
             <Route path='users' element={<Users />} />
             <Route path='cabins' element={<Cabins />} />
             <Route path='settings' element={<Settings />} />

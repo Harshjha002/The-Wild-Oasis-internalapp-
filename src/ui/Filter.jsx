@@ -45,6 +45,8 @@ const Filter = ({ filterField, options }) => {
     SetSearchParams(searchParams)
   }
 
+  if (searchParams.get('page')) searchParams.set('page', 1)
+
   return (
     <StyledFilter>
       {options.map((option) => <FilterButton key={option.value} onClick={() => handleClick(option.value)} active={option.value === currenfilter} disabled={option.value === currenfilter}> {option.label}</FilterButton>)}
