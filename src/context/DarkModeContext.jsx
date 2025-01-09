@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect } from 'react'
 import { useLocalStorageState } from '../hooks/useLocalStorageState'
 
 const DarkModeContext = createContext()
 
 function DarkmodeProvider({ children }) {
-    const [isDarkMode, setIsDarkMode] = useLocalStorageState(false, 'isDarkMode')
+    const [isDarkMode, setIsDarkMode] = useLocalStorageState(window.matchMedia("(prefers-color-scheme: dark)").matches, 'isDarkMode')
 
     function toggleDarkMode() {
         setIsDarkMode((mode) => !mode)

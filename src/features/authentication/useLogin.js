@@ -12,7 +12,6 @@ export const useLogin = () => {
             queryClient.setQueryData(['user'],user.user)
             toast.success('Logged in Succesfull')
             navigate('/',{replace:true})
-            console.log(user)
         },
         onError: err => {
             console.log("Error " , err)

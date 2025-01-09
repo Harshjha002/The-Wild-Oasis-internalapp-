@@ -17,6 +17,7 @@ import Spinner from "../../ui/Spinner";
 import { useCheckOut } from "../check-in-out/useCheckOut";
 
 import { useDeleteBooking } from "./useDeleteBooking";
+import Empty from "../../ui/Empty";
 
 
 const HeadingGroup = styled.div`
@@ -33,6 +34,7 @@ function BookingDetail() {
   const { deleteBooking, isDeleting } = useDeleteBooking()
 
   if (isLoading) return <Spinner />;
+  if (!booking) return <Empty resource="booking" />
 
 
   const { status, id: bookingId } = booking;

@@ -14,7 +14,6 @@ export const useUpdateUser = () => {
         onError: (err) => toast.error(err.message),
       });
 
-      console.log(updateUser)
       return {updateUser,isUpdating}
 
 }

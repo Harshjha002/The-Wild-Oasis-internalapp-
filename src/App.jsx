@@ -71,7 +71,6 @@ const App = () => {
             color: "var(--color-grey-700)",
           }
         }} />
-
       </QueryClientProvider>
     </DarkmodeProvider>
   )

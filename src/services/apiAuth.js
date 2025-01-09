@@ -41,7 +41,6 @@ export async function getCurrentUser() {
 
     const {data , error}=await supabase.auth.getUser()
     
-    console.log(data)
 
     if(error) {
         throw new Error (error.message)
@@ -66,7 +65,6 @@ export async function updateCurrentUser({password , fullName , avatar}){
   const {data , error} =await  supabase.auth.updateUser(updateData)
 
   if(error) throw new Error(error.message)
-    console.log("apiAuth data" , data)
 
   if(!avatar) return data;
 
@@ -84,7 +82,6 @@ export async function updateCurrentUser({password , fullName , avatar}){
   })
 
   if(error2) throw new Error(error2.message)
-    console.log(updateData)
 
     return updatedUser
 }
