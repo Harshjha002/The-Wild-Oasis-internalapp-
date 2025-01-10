@@ -1,25 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { Suspense, lazy } from "react"
-
+import Dashboard from './pages/Dashboard.jsx'
+import Bookings from './pages/Bookings.jsx'
+import Cabins from './pages/Cabins.jsx'
+import Users from './pages/Users.jsx'
+import Settings from './pages/Settings.jsx'
+import Account from './pages/Account.jsx'
+import Login from './pages/Login.jsx'
+import PageNotFound from './pages/PageNotFound.jsx'
 import GlobalStyleComponent from './styles/GlobalStyles.js'
+import Booking from "./pages/Booking.jsx"
+import AppLayout from "./ui/AppLayout.jsx"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Toaster } from "react-hot-toast"
+import Checkin from "./pages/Checkin.jsx"
+import ProtectedRoute from "./ui/ProtectedRoute.jsx"
 import { DarkmodeProvider } from "./context/DarkModeContext.jsx"
 
-// Lazy load the components
-const Dashboard = lazy(() => import('./pages/Dashboard.jsx'))
-const Bookings = lazy(() => import('./pages/Bookings.jsx'))
-const Cabins = lazy(() => import('./pages/Cabins.jsx'))
-const Users = lazy(() => import('./pages/Users.jsx'))
-const Settings = lazy(() => import('./pages/Settings.jsx'))
-const Account = lazy(() => import('./pages/Account.jsx'))
-const Login = lazy(() => import('./pages/Login.jsx'))
-const PageNotFound = lazy(() => import('./pages/PageNotFound.jsx'))
-const Booking = lazy(() => import("./pages/Booking.jsx"))
-const AppLayout = lazy(() => import("./ui/AppLayout.jsx"))
-const Checkin = lazy(() => import("./pages/Checkin.jsx"))
-const ProtectedRoute = lazy(() => import("./ui/ProtectedRoute.jsx"))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,36 +26,34 @@ const queryClient = new QueryClient({
   }
 })
 
+
 const App = () => {
   return (
     <DarkmodeProvider>
+
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
 
         <GlobalStyleComponent />
-
         <BrowserRouter>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<Navigate replace to="dashboard" />} />
-                <Route path='dashboard' element={<Dashboard />} />
-                <Route path='bookings' element={<Bookings />} />
-                <Route path='bookings/:bookingId' element={<Booking />} />
-                <Route path='checkin/:bookingId' element={<Checkin />} />
-                <Route path='users' element={<Users />} />
-                <Route path='cabins' element={<Cabins />} />
-                <Route path='settings' element={<Settings />} />
-                <Route path='account' element={<Account />} />
-              </Route>
-              <Route path='login' element={<Login />} />
-              <Route path='*' element={<PageNotFound />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>}>
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path='dashboard' element={<Dashboard />} />
+              <Route path='bookings' element={<Bookings />} />
+              <Route path='bookings/:bookingId' element={<Booking />} />
+              <Route path='checkin/:bookingId' element={<Checkin />} />
+              <Route path='users' element={<Users />} />
+              <Route path='cabins' element={<Cabins />} />
+              <Route path='settings' element={<Settings />} />
+              <Route path='account' element={<Account />} />
+            </Route>
+            <Route path='login' element={<Login />} />
+            <Route path='*' element={<PageNotFound />} />
+          </Routes>
         </BrowserRouter>
 
         <Toaster position="top-center" gutter={12} containerStyle={{ margin: '8px' }} toastOptions={{
