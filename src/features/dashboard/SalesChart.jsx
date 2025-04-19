@@ -17,7 +17,7 @@ const StyledSalesChart = styled(DashboardBox)`
 
 
 
-const SalesChart = ({ bookings, numsDays }) => {
+const SalesChart = ({ bookings = [] , numsDays }) => {
   const { isDarkMode } = useDarkMode()
 
   const allDates = eachDayOfInterval({
